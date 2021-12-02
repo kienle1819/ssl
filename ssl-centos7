@@ -1,0 +1,24 @@
+//ssl centos7
+# yum -y update
+# yum -y install httpd
+# yum -y install mod_ssl
+# mkdir /var/www/test
+# nano /etc/httpd/conf.d/test-site.conf
+
+<VirtualHost *:80>
+    ServerAdmin admin@test.com
+    DocumentRoot "/var/www/test"
+    ServerName test.com
+    ServerAlias www.test.com
+    ErrorLog "/var/log/httpd/test.error_log"
+    CustomLog "/var/log/httpd/test.access_log" common
+</VirtualHost>
+# yum -y install epel-release
+# yum -y install yum-utils
+# yum -y install certbot-apache
+# certbot --apache
+
+
+# export EDITOR=/bin/nano
+# crontab -e
+* */12 * * * /usr/bin/certbot renew >/dev/null 2>&1
